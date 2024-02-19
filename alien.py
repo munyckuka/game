@@ -6,7 +6,7 @@ class Ino(pygame.sprite.Sprite):
         super(Ino, self).__init__()
         self.screen = screen
         self.image = pygame.image.load('media\\alien.png')
-        self.image = pygame.transform.scale(self.image, (80, 80))
+        self.image = pygame.transform.scale(self.image, (60, 60))
 
         self.rect = self.image.get_rect()
         self.rect.x = self.rect.width
@@ -16,7 +16,7 @@ class Ino(pygame.sprite.Sprite):
 # u see this aliens
     def draw(self):
         self.screen.blit(self.image, self.rect)
-
+# moving down
     def update(self):
-        self.y += 0.1
+        self.y += 1
         self.rect.y = self.y

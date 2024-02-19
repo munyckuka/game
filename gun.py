@@ -4,7 +4,7 @@ class Gun():
         self.screen = screen
         # import image and rescale
         self.image = pygame.image.load("media\space_ship.png")
-        self.image = pygame.transform.scale(self.image, (100, 100))
+        self.image = pygame.transform.scale(self.image, (80, 80))
 
         # hitbox
         self.rect = self.image.get_rect()
@@ -29,3 +29,6 @@ class Gun():
             self.center  -= 2.5
         
         self.rect.centerx = self.center
+
+    def create_gun(self):
+        self.center = self.screen_rect.centerx
