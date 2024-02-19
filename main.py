@@ -1,34 +1,35 @@
-import pygame, controls
-import sys
-from gun import Gun
-from pygame.sprite import Group
-from stats import Stats
-def run():
-    
-    pygame.init()
-    screen_info = pygame.display.Info()
-    screen_width = screen_info.current_w //3
-    screen_height = screen_info.current_h - 30
-    screen = pygame.display.set_mode((screen_width, screen_height))
-    pygame.display.set_caption("Space")
-    bg_color = (8, 1, 28)
-    gun = Gun(screen)
-    bullets = Group()
-    inos = Group()
-    controls.create_army(screen, inos)
-    clock = pygame.time.Clock()
-    fps = 100
-    stats = Stats()
+import pygame, sys
+from spaceship import Spaceship
+from laser import Laser
+pygame.init()
 
-    while True:
-        controls.events(screen, gun, bullets)
-        gun.update_gun()
-        controls.update(bg_color, screen, gun, inos, bullets)
-        controls.update_bullets(inos, bullets)
-        controls.update_inos(stats, screen, gun, inos, bullets)
-        
-        
-        # set fps must be in the end
-        clock.tick(fps)
 
-run()
+GREY = (29, 29, 27)
+SCREEN_WIDTH = 700
+SCREEN_HEIGHT = 700
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("Spaceship adventure")
+
+clock = pygame.time.Clock()
+spaceship = Spaceship(SCREEN_WIDTH, SCREEN_HEIGHT)
+spaceship_group = pygame.sprite.GroupSingle()
+spaceship_group.add(spaceship)
+
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+#   update()
+    spaceship_group.update()
+
+#   draw
+    screen.fill(GREY)
+    spaceship_group.draw(screen)
+    spaceship_group.sprite.lasers_group.draw(screen)
+
+
+
+    pygame.display.update()
+    clock.tick(60)
